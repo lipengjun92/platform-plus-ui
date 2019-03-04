@@ -116,17 +116,18 @@ npm run dev
 启动完成后会自动打开浏览器访问 [http://localhost:8000]()。
 
 
- **项目演示**
+**项目演示**
 - 演示地址：http://fly2you.cn/platform-plus/#/login
 - 账号密码：admin/admin
 
 
 **效果图：**
-#####菜单管理
+
+##### 菜单管理
 ![https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/platform-plus/platform-plus.jpg](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/platform-plus/platform-plus.jpg "菜单管理")
-#####字典管理
+##### 字典管理
 ![https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/platform-plus/dict.png](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/platform-plus/dict.png "字典管理")
-#####在线人数
+##### 在线人数
 ![https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/platform-plus/users.png](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/platform-plus/users.png "在线人数")
 
 
@@ -140,7 +141,6 @@ npm run dev
 
 
 #### 常用API
-- [Mybatis-Plus](https://baomidou.gitee.io/mybatis-plus-doc/#/quick-start)
 - [Vue](https://cn.vuejs.org/v2/api/)
 - [element-ui](http://element-cn.eleme.io/#/zh-CN/component/installation)
 - [echarts](https://www.echartsjs.com/api.html#echarts)
