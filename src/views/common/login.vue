@@ -3,8 +3,8 @@
     <div class="site-content__wrapper">
       <div class="site-content">
         <div class="brand-info">
-          <h2 class="brand-info__text">platform-plus-ui</h2>
-          <p class="brand-info__intro">后台管理系统</p>
+          <h2 class="brand-info__text">微同软件</h2>
+          <p class="brand-info__intro">platform-plus-ui</p>
         </div>
         <div class="login-main">
           <h3 class="login-title">管理员登录</h3>
