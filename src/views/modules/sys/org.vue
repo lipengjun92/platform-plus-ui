@@ -1,7 +1,14 @@
 <template>
   <div class="mod-org">
-    <el-form :inline="true">
+    <el-form :inline="true" :model="searchForm" @keyup.enter.native="getDataList()">
       <el-form-item>
+        <el-input v-model="searchForm.orgName" placeholder="机构名称" clearable></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-input v-model="searchForm.parentName" placeholder="上级机构" clearable></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button @click="getDataList()">查询</el-button>
         <el-button v-if="isAuth('sys:org:save')" type="primary" @click="addOrUpdateHandle()">新增</el-button>
       </el-form-item>
     </el-form>
@@ -92,6 +99,10 @@
   export default {
     data () {
       return {
+        searchForm: {
+          orgName: '',
+          parentName: ''
+        },
         dataList: [],
         addOrUpdateVisible: false
       }
@@ -108,7 +119,11 @@
       getDataList () {
         this.$http({
           url: '/sys/org/queryAll',
-          method: 'get'
+          method: 'get',
+          params: {
+            'orgName': this.searchForm.orgName,
+            'parentName': this.searchForm.parentName
+          }
         }).then(({data}) => {
           if (data && data.code === 0) {
             this.dataList = treeDataTranslate(data.list, 'orgNo', 'parentNo')

@@ -49,7 +49,7 @@
       return {
         visible: false,
         menuList: [],
-        orgList: [],
+        orgList: treeDataTranslate(JSON.parse(sessionStorage.getItem('orgList') || '[]'), 'orgNo', 'parentNo'),
         menuListTreeProps: {
           label: 'name',
           children: 'children'
@@ -73,12 +73,6 @@
     methods: {
       init (id) {
         this.dataForm.id = id || 0
-        this.$http({
-          url: '/sys/org/queryAll',
-          method: 'get'
-        }).then(({data}) => {
-          this.orgList = treeDataTranslate(data.list, 'orgNo', 'parentNo')
-        })
 
         this.$http({
           url: '/sys/menu/list',

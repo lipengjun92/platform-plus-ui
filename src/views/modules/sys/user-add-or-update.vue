@@ -69,7 +69,7 @@
   export default {
     data () {
       return {
-        orgNoOptions: [],
+        orgNoOptions: treeDataTranslate(JSON.parse(sessionStorage.getItem('orgList') || '[]'), 'orgNo', 'parentNo'),
         orgListTreeProps: {
           label: 'orgName',
           children: 'children'
@@ -100,12 +100,6 @@
       init (id) {
         this.dataForm.id = id || 0
         this.$http({
-          url: '/sys/org/queryAll',
-          method: 'get'
-        }).then(({data}) => {
-          this.orgNoOptions = treeDataTranslate(data.list, 'orgNo', 'parentNo')
-        })
-        this.$http({
           url: '/sys/role/select',
           method: 'get'
         }).then(({data}) => {
@@ -129,7 +123,7 @@
                 this.dataForm.email = data.user.email
                 this.dataForm.mobile = data.user.mobile
                 this.dataForm.orgNo = data.user.orgNo
-                this.dataForm.orgName = data.user.orgName
+                this.dataForm.orgName = this.transOrg(data.user.orgNo)
                 this.dataForm.roleIdList = data.user.roleIdList
                 this.dataForm.status = data.user.status
               }

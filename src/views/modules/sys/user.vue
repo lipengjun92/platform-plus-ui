@@ -48,10 +48,13 @@
         label="真实姓名">
       </el-table-column>
       <el-table-column
-        prop="orgName"
+        prop="orgNo"
         header-align="center"
         align="center"
         label="所属机构">
+        <template slot-scope="scope">
+          <span>{{transOrg(scope.row.orgNo)}}</span>
+        </template>
       </el-table-column>
       <el-table-column
         prop="email"
@@ -148,8 +151,8 @@
           }
         }).then(({data}) => {
           if (data && data.code === 0) {
-            this.dataList = data.page.list
-            this.totalPage = data.page.totalCount
+            this.dataList = data.page.records
+            this.totalPage = data.page.total
           } else {
             this.dataList = []
             this.totalPage = 0
