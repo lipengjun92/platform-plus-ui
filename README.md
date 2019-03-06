@@ -6,38 +6,38 @@
 入门爆款云服务器，降低采购成本，开发者和小微企业首选。
 [![阿里云开年采购季](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/active/ali/540x250.jpg)](https://www.aliyun.com/acts/product-section-2019/new-users?userCode=i8s6n64p)
 
-# 介绍
+## 介绍
 
 platform-plus-ui基于vue、element-ui构建开发，实现platform-plus后台管理前端功能。
 
-# 功能
+## 实现功能
 
 ```
-- 管理员列表
-- 角色管理
-- 菜单管理
-- 组织机构
-- 系统参数
-- 数据字典管理
-- 文件上传
-- 定时任务
-- 系统日志
-- SQL监控
-- 代码生成器
-- 缓存信息
-- 在线用户管理
-- 短信配置
-
-- 前后端分离，通过token进行数据交互，可独立部署
-- 主题定制，通过scss变量统一一站式定制
-- 动态菜单，通过菜单管理统一管理访问路由
-- 发布时，可动态配置CDN静态资源／切换新旧版本
-- 更多，持续迭代中...
+- 系统管理
+    - 菜单管理
+    - 组织机构
+    - 系统参数
+    - 字典管理
+    - 文件上传
+    - 系统日志
+- 权限管理
+    - 管理员列表
+    - 角色管理
+- 短信平台
+    - 短信配置
+- 任务调度
+    - 定时任务
+- 开发工具
+    - 在线用户管理
+    - 缓存信息
+    - SQL监控
+    - 接口文档
+    - 代码生成器
 ```
 
 # 技术栈
 
-你需要在本地安装 nodejs，提前了解和学习这些知识会对使用本项目有很大的帮助。
+你需要在本地安装 nodejs。
 
 - [nodejs](http://nodejs.org/)
 - [ES6](http://es6.ruanyifeng.com/)
@@ -84,21 +84,6 @@ platform-plus-ui基于vue、element-ui构建开发，实现platform-plus后台�
 └── package.json               // package.json
 ```
 
-# 部署Nginx配置参考
-```
-  location / {
-        # 指向我们打包后上传的前端文件
-        root /usr/local/nginx/dist;
-        index index.html;
-    }
-    location /platform-plus {
-        # 转发请求到后端
-        proxy_pass                         http://localhost:8080;
-        proxy_set_header  Host             $host;
-        proxy_set_header  X-Real-IP        $remote_addr;
-        proxy_set_header  X-Forwarded-For  $proxy_add_x_forwarded_for;
-    }
-```
 # 安装
 
 ```bash
@@ -124,6 +109,23 @@ npm run dev
 启动完成后会自动打开浏览器访问 [http://localhost:8000]()。
 
 
+# 部署Nginx配置参考
+```
+  location / {
+        # 指向我们打包后上传的前端文件
+        root /usr/local/nginx/dist;
+        index index.html;
+    }
+    location /platform-plus {
+        # 转发请求到后端
+        proxy_pass                         http://localhost:8080;
+        proxy_set_header  Host             $host;
+        proxy_set_header  X-Real-IP        $remote_addr;
+        proxy_set_header  X-Forwarded-For  $proxy_add_x_forwarded_for;
+    }
+```
+
+
 **项目演示**
 - 演示地址：http://fly2you.cn/platform-plus/#/login
 - 账号密码：admin/admin
@@ -131,12 +133,16 @@ npm run dev
 
 **效果图：**
 
-##### 菜单管理
+- 菜单管理
 ![https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/platform-plus/platform-plus.jpg](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/platform-plus/platform-plus.jpg "菜单管理")
-##### 字典管理
+- 字典管理
 ![https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/platform-plus/dict.png](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/platform-plus/dict.png "字典管理")
-##### 在线人数
+- 在线人数
 ![https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/platform-plus/users.png](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/platform-plus/users.png "在线人数")
+- 缓存数据
+![https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/platform-plus/doc.png](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/platform-plus/redis.png "缓存数据")
+- 接口文档
+![https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/platform-plus/doc.png](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/platform-plus/doc.png "接口文档")
 
 
 #### 提交反馈
