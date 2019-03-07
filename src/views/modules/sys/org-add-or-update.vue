@@ -45,8 +45,6 @@
 </template>
 
 <script>
-  import {treeDataTranslate} from '@/utils'
-
   export default {
     data () {
       return {
@@ -93,7 +91,7 @@
             'orgNo': '0',
             'orgName': '顶级'
           })
-          this.parentOptions = treeDataTranslate(data.list, 'orgNo', 'parentNo')
+          this.parentOptions = this.treeDataTranslate(data.list, 'orgNo', 'parentNo')
         }).then(() => {
           this.visible = true
           this.$nextTick(() => {

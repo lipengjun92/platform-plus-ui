@@ -1,8 +1,8 @@
 {
   "name": "platform-plus-ui",
   "version": "1.0.0",
-  "description": "platform-plus后台管理系统",
-  "author": "合肥-传说哥 <939961241@qq.com>",
+  "description": "微同软件管理平台",
+  "author": "李鹏军 <939961241@qq.com>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",

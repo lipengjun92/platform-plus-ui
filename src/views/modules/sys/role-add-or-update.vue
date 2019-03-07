@@ -42,14 +42,12 @@
 </template>
 
 <script>
-  import {treeDataTranslate} from '@/utils'
-
   export default {
     data () {
       return {
         visible: false,
         menuList: [],
-        orgList: treeDataTranslate(JSON.parse(sessionStorage.getItem('orgList') || '[]'), 'orgNo', 'parentNo'),
+        orgList: this.treeDataTranslate(JSON.parse(sessionStorage.getItem('orgList') || '[]'), 'orgNo', 'parentNo'),
         menuListTreeProps: {
           label: 'name',
           children: 'children'
@@ -78,7 +76,7 @@
           url: '/sys/menu/list',
           method: 'get'
         }).then(({data}) => {
-          this.menuList = treeDataTranslate(data.menuList, 'menuId')
+          this.menuList = this.treeDataTranslate(data.menuList, 'menuId')
         }).then(() => {
           this.visible = true
           this.$nextTick(() => {

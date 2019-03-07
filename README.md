@@ -7,11 +7,9 @@
 [![阿里云开年采购季](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/active/ali/540x250.jpg)](https://www.aliyun.com/acts/product-section-2019/new-users?userCode=i8s6n64p)
 
 ## 介绍
-
 platform-plus-ui基于vue、element-ui构建开发，实现platform-plus后台管理前端功能。
 
 ## 实现功能
-
 ```
 - 系统管理
     - 菜单管理
@@ -36,7 +34,6 @@ platform-plus-ui基于vue、element-ui构建开发，实现platform-plus后台�
 ```
 
 # 技术栈
-
 你需要在本地安装 nodejs。
 
 - [nodejs](http://nodejs.org/)
@@ -51,9 +48,7 @@ platform-plus-ui基于vue、element-ui构建开发，实现platform-plus后台�
 - [iconfont](http://www.iconfont.cn/)
 
 # 目录结构
-
 本项目已经通过vue-cli脚手架为你生产完整的开发框架（有根据业务需求做调整修改），下面是整个项目的目录结构。
-
 ```bash
 ├── build                      // 构建相关  
 ├── config                     // 构建配置相关
@@ -85,7 +80,6 @@ platform-plus-ui基于vue、element-ui构建开发，实现platform-plus后台�
 ```
 
 # 安装
-
 ```bash
 # 安装依赖
 npm install
@@ -95,7 +89,6 @@ npm run dev
 ```
 
 安装过程中，可能会出现安装过慢、报错等情况，请尝试以下方式：
-
 ```bash
 npm install -g cnpm --registry=https://registry.npm.taobao.org
 
@@ -104,10 +97,7 @@ cnpm install
 # 启动服务
 npm run dev
 ```
-
-
 启动完成后会自动打开浏览器访问 [http://localhost:8000]()。
-
 
 # 部署Nginx配置参考
 ```
@@ -118,21 +108,18 @@ npm run dev
     }
     location /platform-plus {
         # 转发请求到后端
-        proxy_pass                         http://localhost:8080;
+        proxy_pass                         http://localhost:8888;
         proxy_set_header  Host             $host;
         proxy_set_header  X-Real-IP        $remote_addr;
         proxy_set_header  X-Forwarded-For  $proxy_add_x_forwarded_for;
     }
 ```
 
-
 **项目演示**
 - 演示地址：http://fly2you.cn/platform-plus/#/login
 - 账号密码：admin/admin
 
-
 **效果图：**
-
 - 菜单管理
 ![https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/platform-plus/platform-plus.jpg](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/platform-plus/platform-plus.jpg "菜单管理")
 - 字典管理
@@ -144,15 +131,13 @@ npm run dev
 - 接口文档
 ![https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/platform-plus/doc.png](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/platform-plus/doc.png "接口文档")
 
-
 #### 提交反馈
-
 1. 欢迎提交 issue，请写清楚遇到问题的原因，开发环境，复显步骤。
-
 2. 不接受`功能请求`的 issue，功能请求可能会被直接关闭。  
-
-3. 官方QQ群：<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=2d02d83d8be4c2cb6848bbae1df1037ba2acddecd2a1aa8cef7b3e4ab4ff75aa"><img border="0" src="pub.idqqimg.com/wpa/images/group.png" alt="微同软件 ①群" title="微同软件 ①群"></a><a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=990a15d445ef791dba99d22d9772c06ac7894ffa6ac639b1eec530554c432583"><img border="0" src="pub.idqqimg.com/wpa/images/group.png" alt="微同软件 ②群" title="微同软件 ②群"></a>
-
+3. 官方QQ群：
+- <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=ac742b7481b95fac926a3f2196085108bceeebcdf14bd716cbea519751e69445"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="微同软件 ①群" title="微同软件 ①群"></a>
+- <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=dcb460bfa21213a2712677bab7292fd8eb2138a1914af5af397b58e7c02690c5"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="微同软件 ②群" title="微同软件 ②群"></a>
+- <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=c7657db5d4e65a40e46ee5998534f7b9b9fa56d0347c3af3157c7f6240c0d0dd"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="微同软件 ③群" title="微同软件 ③群"></a>
 
 #### 常用API
 - [Vue](https://cn.vuejs.org/v2/api/)

@@ -80,28 +80,6 @@ export function transUser (userId) {
   return '--'
 }
 
-/**
- * 根据审核状态改变颜色
- * @param state
- * @returns {*}
- */
-export function tranColor (state) {
-  if (state === '1') {
-    return {
-      'color': '#67C23A'
-    }
-  } else if (state === '-1') {
-    return {
-      'color': '#F56C6C'
-    }
-  } else if (state === '0') {
-    return {
-      'color': '#E6A23C'
-    }
-  }
-  return {}
-}
-
 export function transDict (code, value) {
   if (!value && value !== 0) {
     return '--'

@@ -94,7 +94,6 @@
 <script>
   import TableTreeColumn from '@/components/table-tree-column'
   import AddOrUpdate from './org-add-or-update'
-  import {treeDataTranslate} from '@/utils'
 
   export default {
     data () {
@@ -126,7 +125,7 @@
           }
         }).then(({data}) => {
           if (data && data.code === 0) {
-            this.dataList = treeDataTranslate(data.list, 'orgNo', 'parentNo')
+            this.dataList = this.treeDataTranslate(data.list, 'orgNo', 'parentNo')
           } else {
             this.dataList = []
           }

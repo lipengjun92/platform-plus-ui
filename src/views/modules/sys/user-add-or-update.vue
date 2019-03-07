@@ -64,12 +64,10 @@
 </template>
 
 <script>
-  import {treeDataTranslate} from '@/utils'
-
   export default {
     data () {
       return {
-        orgNoOptions: treeDataTranslate(JSON.parse(sessionStorage.getItem('orgList') || '[]'), 'orgNo', 'parentNo'),
+        orgNoOptions: this.treeDataTranslate(JSON.parse(sessionStorage.getItem('orgList') || '[]'), 'orgNo', 'parentNo'),
         orgListTreeProps: {
           label: 'orgName',
           children: 'children'

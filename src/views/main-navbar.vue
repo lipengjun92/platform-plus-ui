@@ -17,14 +17,19 @@
       <el-menu
         class="site-navbar__menu site-navbar__menu--right"
         mode="horizontal">
-        <el-menu-item index="1" @click="$router.push({ name: 'theme' })">
+        <el-menu-item index="1">
+          <el-badge value="hot">
+            <a href="//fly2you.cn/" target="_blank">官方社区</a>
+          </el-badge>
+        </el-menu-item>
+        <el-menu-item index="2" @click="$router.push({ name: 'theme' })">
           <template slot="title">
             <el-badge is-dot value="new">
               <icon-svg name="xitongpeizhi" class="el-icon-setting"></icon-svg>
             </el-badge>
           </template>
         </el-menu-item>
-        <el-menu-item class="site-navbar__avatar" index="2">
+        <el-menu-item class="site-navbar__avatar" index="3">
           <el-dropdown :show-timeout="0" placement="bottom">
             <span class="el-dropdown-link">
               <img src="~@/assets/img/avatar.png" :alt="userName">{{ userName }}

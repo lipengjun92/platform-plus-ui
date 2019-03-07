@@ -95,7 +95,6 @@
 <script>
   import TableTreeColumn from '@/components/table-tree-column'
   import AddOrUpdate from './menu-add-or-update'
-  import {treeDataTranslate} from '@/utils'
 
   export default {
     data () {
@@ -119,7 +118,7 @@
           url: '/sys/menu/list',
           method: 'get'
         }).then(({data}) => {
-          this.dataList = treeDataTranslate(data.menuList, 'menuId')
+          this.dataList = this.treeDataTranslate(data.menuList, 'menuId')
         })
       },
       // 新增 / 修改

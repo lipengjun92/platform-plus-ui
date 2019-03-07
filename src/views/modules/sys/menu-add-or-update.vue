@@ -73,7 +73,6 @@
 </template>
 
 <script>
-  import {treeDataTranslate} from '@/utils'
   import Icon from '@/icons'
 
   export default {
@@ -128,7 +127,7 @@
           url: '/sys/menu/select',
           method: 'get'
         }).then(({data}) => {
-          this.menuList = treeDataTranslate(data.menuList, 'menuId')
+          this.menuList = this.treeDataTranslate(data.menuList, 'menuId')
         }).then(() => {
           this.visible = true
           this.$nextTick(() => {
