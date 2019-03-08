@@ -11,11 +11,14 @@ import httpRequest from '@/utils/httpRequest' // api: https://github.com/axios/a
 import {isAuth, treeDataTranslate, transOrg, transUser, transDict} from '@/utils'
 import cloneDeep from 'lodash/cloneDeep'
 import ElDict from './components/el-dict'
+import Ueditor from './components/ueditor'
 
 Vue.use(VueCookie)
 Vue.use(ElDict)
+Vue.use(Ueditor)
 
 Vue.component('el-dict', ElDict)
+Vue.component('ueditor', Ueditor)
 
 Vue.config.productionTip = false
 

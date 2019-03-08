@@ -1,5 +1,6 @@
 <template>
   <div class="mod-demo-echarts">
+    <ueditor v-model="msg"></ueditor>
     <el-alert
       title="提示："
       type="warning"
@@ -40,6 +41,7 @@
   export default {
     data () {
       return {
+        msg: '<h2><img src="http://img.baidu.com/hi/jx2/j_0003.gif"/>Vue + UEditor + v-model双向绑定</h2>',
         chartLine: null,
         chartBar: null,
         chartPie: null,
