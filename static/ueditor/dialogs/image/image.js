@@ -872,8 +872,8 @@
                       var json = isJsonp ? r:eval('(' + r.responseText + ')');
                       if (json.state == 'SUCCESS') {
                         _this.pushData(json.list.records);
-                        _this.listIndex = parseInt(json.start) + parseInt(json.list.records.length);
-                        if(_this.listIndex >= json.total) {
+                        _this.listIndex = parseInt(json.list.current) + 1;
+                        if(_this.listIndex > json.list.pages) {
                           _this.listEnd = true;
                         }
                         _this.isLoadingData = false;
