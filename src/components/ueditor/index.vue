@@ -18,8 +18,6 @@
           serverUrl: this.$http.BASE_URL + `/sys/oss/upload?token=${this.$cookie.get('token')}`,
           // cdn地址
           UEDITOR_HOME_URL: window.SITE_CONFIG.cdnUrl + '/static/ueditor/',
-          // 编辑器不自动被内容撑高
-          autoHeightEnabled: false,
           enableAutoSave: false,
           // 初始容器高度
           initialFrameHeight: 240,
