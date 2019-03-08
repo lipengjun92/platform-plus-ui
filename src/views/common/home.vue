@@ -1,14 +1,11 @@
 <template>
   <div class="mod-demo-echarts">
-    <ueditor v-model="msg"></ueditor>
-    <el-alert
-      title="提示："
-      type="warning"
-      :closable="false">
-      <div slot-scope="description">
-        <p class="el-alert__description">ECharts，具体使用请参考：http://echarts.baidu.com/index.html</p>
-      </div>
-    </el-alert>
+    <el-col :span="24">
+      <el-card>
+        <ueditor v-model="msg"></ueditor>
+        {{msg}}
+      </el-card>
+    </el-col>
 
     <el-row :gutter="20">
       <el-col :span="24">
@@ -36,12 +33,10 @@
 </template>
 
 <script>
-  import echarts from 'echarts'
-
   export default {
     data () {
       return {
-        msg: '<h2><img src="http://img.baidu.com/hi/jx2/j_0003.gif"/>Vue + UEditor + v-model双向绑定</h2>',
+        msg: '<h2><h2><img src="http://img.baidu.com/hi/face/i_f03.gif"/>Vue + UEditor + v-model双向绑定</h2></h2>',
         chartLine: null,
         chartBar: null,
         chartPie: null,
@@ -155,7 +150,7 @@
             }
           ]
         }
-        this.chartLine = echarts.init(document.getElementById('J_chartLineBox'))
+        this.chartLine = this.$echarts.init(document.getElementById('J_chartLineBox'))
         this.chartLine.setOption(option)
         window.addEventListener('resize', () => {
           this.chartLine.resize()
@@ -230,7 +225,7 @@
             }
           ]
         }
-        this.chartBar = echarts.init(document.getElementById('J_chartBarBox'))
+        this.chartBar = this.$echarts.init(document.getElementById('J_chartBarBox'))
         this.chartBar.setOption(option)
         window.addEventListener('resize', () => {
           this.chartBar.resize()
@@ -332,7 +327,7 @@
             }
           ]
         }
-        this.chartPie = echarts.init(document.getElementById('J_chartPieBox'))
+        this.chartPie = this.$echarts.init(document.getElementById('J_chartPieBox'))
         this.chartPie.setOption(option)
         window.addEventListener('resize', () => {
           this.chartPie.resize()
@@ -596,7 +591,7 @@
             }
           ]
         }
-        this.chartPie = echarts.init(document.getElementById('J_chartScatterBox'))
+        this.chartPie = this.$echarts.init(document.getElementById('J_chartScatterBox'))
         this.chartPie.setOption(option)
         window.addEventListener('resize', () => {
           this.chartPie.resize()

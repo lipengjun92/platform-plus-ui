@@ -8,6 +8,7 @@ import '@/icons'                              // api: http://www.iconfont.cn/
 import '@/element-ui-theme'
 import '@/assets/scss/index.scss'
 import httpRequest from '@/utils/httpRequest' // api: https://github.com/axios/axios
+import echarts from 'echarts' // 引入echarts
 import {isAuth, treeDataTranslate, transOrg, transUser, transDict} from '@/utils'
 import cloneDeep from 'lodash/cloneDeep'
 import ElDict from './components/el-dict'
@@ -24,6 +25,7 @@ Vue.config.productionTip = false
 
 // 挂载全局
 Vue.prototype.$http = httpRequest // ajax请求方法
+Vue.prototype.$echarts = echarts
 Vue.prototype.isAuth = isAuth     // 权限方法
 Vue.prototype.treeDataTranslate = treeDataTranslate     // 树形数据转换
 Vue.prototype.transOrg = transOrg     // 机构翻译

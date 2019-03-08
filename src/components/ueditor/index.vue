@@ -14,19 +14,17 @@
         status: 0,
         initValue: '',
         defaultConfig: {
-          // VUE CLI 3 会添加 process.env.BASE_URL 的环境变量，而 VUE CLI 2 没有，所以借此设置 UEDITOR_HOME_URL，能涵盖大部分 Vue 开发者的使用场景
-          UEDITOR_HOME_URL: process.env.BASE_URL ? process.env.BASE_URL + 'plugins/UEditor/' : '/static/plugins/UEditor/',
-          // UEditor 资源文件的存放路径，如果你使用的是 vue-cli 生成的项目，通常不需要设置该选项，vue-ueditor-wrap 会自动处理常见的情况，如果需要特殊配置，参考下方的常见问题2
-          // UEDITOR_HOME_URL: '/static/plugins/UEditor/'
+          // 上传文件接口
+          serverUrl: this.$http.BASE_URL + `/sys/oss/upload?token=${this.$cookie.get('token')}`,
+          // cdn地址
+          UEDITOR_HOME_URL: window.SITE_CONFIG.cdnUrl + '/static/ueditor/',
           // 编辑器不自动被内容撑高
           autoHeightEnabled: false,
           enableAutoSave: false,
           // 初始容器高度
           initialFrameHeight: 240,
           // 初始容器宽度
-          initialFrameWidth: '100%',
-          // 上传文件接口（这个地址是我为了方便各位体验文件上传功能搭建的临时接口，请勿在生产环境使用！！！）
-          serverUrl: this.$http.BASE_URL + `/sys/oss/upload?token=${this.$cookie.get('token')}`
+          initialFrameWidth: '100%'
         }
       }
     },
@@ -158,7 +156,8 @@
           } else {
             window['$loadEnv'] = new LoadEvent()
             // 如果在其他地方只引用ueditor.all.min.js，在加载ueditor.config.js之后仍需要重新加载ueditor.all.min.js，所以必须确保ueditor.config.js已加载
-            this._loadConfig().then(() => this._loadCore()).then(() => {
+            // 引用ueditor.all.min.js之前要引用jquery-2.2.3.min.js
+            this._loadConfig().then(() => this._loadJq()).then(() => this._loadCore()).then(() => {
               resolve()
               window['$loadEnv'].emit('scriptsLoaded')
             })
@@ -180,6 +179,25 @@
               resolve()
             } else {
               console.error('加载ueditor.config.js失败,请检查您的配置地址UEDITOR_HOME_URL填写是否正确!\n', configScript.src)
+            }
+          }
+        })
+      },
+      _loadJq () {
+        return new Promise((resolve, reject) => {
+          if (window.UE && window.UE.getEditor) {
+            resolve()
+            return
+          }
+          let coreScript = document.createElement('script')
+          coreScript.type = 'text/javascript'
+          coreScript.src = this.mixedConfig.UEDITOR_HOME_URL + 'jquery-2.2.3.min.js'
+          document.getElementsByTagName('head')[0].appendChild(coreScript)
+          coreScript.onload = function () {
+            if (window.$) {
+              resolve()
+            } else {
+              console.error('加载jquery-2.2.3.min.js失败,请检查您的配置地址UEDITOR_HOME_URL填写是否正确!\n', coreScript.src)
             }
           }
         })

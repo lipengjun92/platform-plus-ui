@@ -93,9 +93,5 @@ module.exports = {
     net: 'empty',
     tls: 'empty',
     child_process: 'empty'
-  },
-  // 引入外部库, 无需webpack打包处理
-  externals: {
-    echarts: 'echarts'
   }
 }

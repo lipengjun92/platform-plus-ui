@@ -30,7 +30,7 @@
         UEDITOR_HOME_URL: URL
 
         // 服务器统一请求接口路径
-        , serverUrl: URL + "php/controller.php"
+        , serverUrl: URL + "sys/oss/upload"
 
         //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的重新定义
         , toolbars: [[
@@ -362,7 +362,7 @@
 		//output xss过滤
 		,outputXssFilter: true
 		// xss过滤白名单 名单来源: https://raw.githubusercontent.com/leizongmin/js-xss/master/lib/default.js
-		,whiteList: {
+		,whitList: {
 			a:      ['target', 'href', 'title', 'class', 'style'],
 			abbr:   ['title', 'class', 'style'],
 			address: ['class', 'style'],

@@ -8,9 +8,6 @@
       window.SITE_CONFIG.cdnUrl + '/static/css/app.css'
     ],
     js: [
-      // 插件, 放置业务之前加载, 以免业务需求依赖插件时, 还未加载出错
-      // 插件 - echarts
-      window.SITE_CONFIG.cdnUrl + '/static/plugins/echarts-3.8.5/echarts.common.min.js',
       // 业务
       window.SITE_CONFIG.cdnUrl + '/static/js/manifest.js',
       window.SITE_CONFIG.cdnUrl + '/static/js/vendor.js',

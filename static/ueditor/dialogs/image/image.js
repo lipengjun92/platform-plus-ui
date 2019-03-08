@@ -704,12 +704,6 @@
             uploader.on('uploadBeforeSend', function (file, data, header) {
                 //这里可以通过data对象添加POST参数
                 header['X_Requested_With'] = 'XMLHttpRequest';
-                // HaoChuan9421
-                if(editor.options.headers && Object.prototype.toString.apply(editor.options.headers) === "[object Object]"){
-                    for(var key in editor.options.headers){
-                        header[key] = editor.options.headers[key]
-                    }
-                }
             });
 
             uploader.on('uploadProgress', function (file, percentage) {
@@ -778,7 +772,7 @@
         getInsertList: function () {
             var i, data, list = [],
                 align = getAlign(),
-                prefix = editor.getOpt('imageUrlPrefix');
+                prefix = editor.getOpt('imageUrlPrefix') || '';
             for (i = 0; i < this.imageList.length; i++) {
                 data = this.imageList[i];
                 list.push({
@@ -847,7 +841,7 @@
             /* 拉取数据需要使用的值 */
             this.state = 0;
             this.listSize = editor.getOpt('imageManagerListSize');
-            this.listIndex = 0;
+            this.listIndex = 1;
             this.listEnd = false;
 
             /* 第一次拉取数据 */
@@ -866,39 +860,38 @@
                 this.isLoadingData = true;
                 var url = editor.getActionUrl(editor.getOpt('imageManagerActionName')),
                     isJsonp = utils.isCrossDomainUrl(url);
-                ajax.request(url, {
-                    'timeout': 100000,
-                    'dataType': isJsonp ? 'jsonp':'',
-                    'data': utils.extend({
-                            start: this.listIndex,
-                            size: this.listSize
-                        }, editor.queryCommandValue('serverparam')),
-                    'method': 'get',
-                    'onsuccess': function (r) {
-                        try {
-                            var json = isJsonp ? r:eval('(' + r.responseText + ')');
-                            if (json.state == 'SUCCESS') {
-                                _this.pushData(json.list);
-                                _this.listIndex = parseInt(json.start) + parseInt(json.list.length);
-                                if(_this.listIndex >= json.total) {
-                                    _this.listEnd = true;
-                                }
-                                _this.isLoadingData = false;
-                            }
-                        } catch (e) {
-                            if(r.responseText.indexOf('ue_separate_ue') != -1) {
-                                var list = r.responseText.split(r.responseText);
-                                _this.pushData(list);
-                                _this.listIndex = parseInt(list.length);
-                                _this.listEnd = true;
-                                _this.isLoadingData = false;
-                            }
+                $.ajax({
+                  url: url,
+                  type: 'get',
+                  data: utils.extend({
+                    page: this.listIndex,
+                    limit: this.listSize
+                  }, editor.queryCommandValue('serverparam')),
+                  success: function (r) {
+                    try {
+                      var json = isJsonp ? r:eval('(' + r.responseText + ')');
+                      if (json.state == 'SUCCESS') {
+                        _this.pushData(json.list.records);
+                        _this.listIndex = parseInt(json.start) + parseInt(json.list.records.length);
+                        if(_this.listIndex >= json.total) {
+                          _this.listEnd = true;
                         }
-                    },
-                    'onerror': function () {
                         _this.isLoadingData = false;
+                      }
+                    } catch (e) {
+                      if(r.responseText.indexOf('ue_separate_ue') != -1) {
+                        var list = r.responseText.split(r.responseText);
+                        _this.pushData(list);
+                        _this.listIndex = parseInt(list.length);
+                        _this.listEnd = true;
+                        _this.isLoadingData = false;
+                      }
                     }
-                });
+                  },
+                  error: function () {
+                    _this.isLoadingData = false;
+                  }
+                })
             }
         },
         /* 添加图片到列表界面上 */
