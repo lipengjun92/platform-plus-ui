@@ -869,7 +869,8 @@
                   }, editor.queryCommandValue('serverparam')),
                   success: function (r) {
                     try {
-                      var json = isJsonp ? r:eval('(' + r.responseText + ')');
+                      // var json = isJsonp ? r:eval('(' + r.responseText + ')');
+                      var json = r;
                       if (json.state == 'SUCCESS') {
                         _this.pushData(json.list.records);
                         _this.listIndex = parseInt(json.list.current) + 1;
