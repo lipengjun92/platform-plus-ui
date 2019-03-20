@@ -21,6 +21,7 @@
           enableAutoSave: false,
           // 初始容器高度
           initialFrameHeight: 240,
+          autosave: false,
           // 初始容器宽度
           initialFrameWidth: '100%'
         }

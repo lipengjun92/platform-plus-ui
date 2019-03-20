@@ -104,7 +104,7 @@
 <style lang="scss">
   body {
     height: auto;
-    background: url(~@/assets/img/bg.jpg) no-repeat center fixed;
+    background: url(~@/assets/img/login_bg.jpg) no-repeat center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;

@@ -7,7 +7,17 @@
 [![阿里云开年采购季](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/active/ali/540x250.jpg)](https://www.aliyun.com/acts/product-section-2019/new-users?userCode=i8s6n64p)
 
 ## 介绍
-platform-plus-ui基于vue、element-ui构建开发，实现platform-plus后台管理前端功能。
+- platform-plus-ui基于vue、element-ui构建开发，实现platform-plus后台管理前端功能。
+- 封装富文本编辑器组件，并且支持使用v-model双向绑定富文本数据。简单到像使用input一样。
+```
+<ueditor v-model="msg"></ueditor>
+...
+data () {
+      return {
+        msg: '<h2><img src="http://img.baidu.com/hi/face/i_f03.gif"/>Vue + UEditor + v-model双向绑定</h2>'
+      }
+```
+- 后台地址：https://github.com/lipengjun92/platform-plus
 
 ## 实现功能
 ```
@@ -99,6 +109,17 @@ npm run dev
 ```
 启动完成后会自动打开浏览器访问 [http://localhost:8000]()。
 
+# 打包部署
+```
+修改
+/static/config/index-[prod].js文件中  
+window.SITE_CONFIG['baseUrl'] = 'http://47.93.215.16/platform-plus'// 后台接口请求地址
+window.SITE_CONFIG['domain'] = '静态资源cdn地址';  
+
+# 构建生产环境(默认)
+npm run build
+
+```
 # 部署Nginx配置参考
 ```
   location / {
@@ -117,7 +138,19 @@ npm run dev
 
 **项目演示**
 - 演示地址：http://fly2you.cn/platform-plus/#/login
-- 账号密码：admin/admin
+- 账号密码：
+  - admin/admin
+  - test/888888
+  - test1/888888
+  - test2/888888
+  - test3/888888
+  - test4/888888
+  - test5/888888
+  - test6/888888
+  - test7/888888
+  - test8/888888
+  - test9/888888
+  - test10/888888
 
 **效果图：**
 - 菜单管理
@@ -134,7 +167,8 @@ npm run dev
 #### 提交反馈
 1. 欢迎提交 issue，请写清楚遇到问题的原因，开发环境，复显步骤。
 2. 不接受`功能请求`的 issue，功能请求可能会被直接关闭。  
-3. 官方QQ群：
+3. 代码修改请遵循指定的 `ESLint` 规则，`PR` 之前请先执行 `npm run lint` 进行代码风格检测，大部分语法细节可以通过 `npm run fix` 修正。
+4. 官方QQ群：
 - <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=ac742b7481b95fac926a3f2196085108bceeebcdf14bd716cbea519751e69445"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="微同软件 ①群" title="微同软件 ①群"></a>
 - <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=dcb460bfa21213a2712677bab7292fd8eb2138a1914af5af397b58e7c02690c5"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="微同软件 ②群" title="微同软件 ②群"></a>
 - <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=c7657db5d4e65a40e46ee5998534f7b9b9fa56d0347c3af3157c7f6240c0d0dd"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="微同软件 ③群" title="微同软件 ③群"></a>
