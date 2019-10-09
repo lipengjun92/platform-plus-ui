@@ -15,6 +15,7 @@
     <el-table
       :data="dataList"
       border
+      row-key="orgNo"
       style="width: 100%;">
       <el-table-column
         prop="orgNo"
@@ -125,7 +126,7 @@
           }
         }).then(({data}) => {
           if (data && data.code === 0) {
-            this.dataList = this.treeDataTranslate(data.list, 'orgNo', 'parentNo')
+            this.dataList = this.treeDataTranslate(data.list, 'orgNo', 'parentNo', 'childrens')
           } else {
             this.dataList = []
           }

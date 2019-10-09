@@ -32,7 +32,7 @@
       },
       childKey: {
         type: String,
-        default: 'children'
+        default: 'childrens'
       }
     },
     methods: {

@@ -49,6 +49,9 @@
         width="150"
         label="操作">
         <template slot-scope="scope">
+          <el-button v-if="isAuth('sys:config:info')" type="text" size="small"
+                     @click="showDetails(scope.row.id)">查看
+          </el-button>
           <el-button v-if="isAuth('sys:config:update')" type="text" size="small"
                      @click="addOrUpdateHandle(scope.row.id)">修改
           </el-button>
@@ -130,6 +133,13 @@
       // 多选
       selectionChangeHandle (val) {
         this.dataListSelections = val
+      },
+      // 查看详情
+      showDetails (id) {
+        this.addOrUpdateVisible = true
+        this.$nextTick(() => {
+          this.$refs.addOrUpdate.init(id, true)
+        })
       },
       // 新增 / 修改
       addOrUpdateHandle (id) {

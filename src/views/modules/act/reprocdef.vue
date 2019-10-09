@@ -2,7 +2,10 @@
   <div class="mod-reprocdef">
     <el-form :inline="true" :model="searchForm" @keyup.enter.native="getDataList()">
       <el-form-item>
-        <el-input v-model="searchForm.name" placeholder="流程名称" clearable></el-input>
+        <el-input v-model="searchForm.key" placeholder="流程编号" clearable></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-input v-model="searchForm.category" placeholder="流程命名空间" clearable></el-input>
       </el-form-item>
       <el-form-item>
         <el-button @click="getDataList()">查询</el-button>
@@ -78,16 +81,6 @@
         label="描述信息">
       </el-table-column>
       <el-table-column
-        prop="hasStartFormKey"
-        header-align="center"
-        align="center"
-        label="是否从key启动">
-        <template slot-scope="scope">
-          <el-tag v-if="scope.row.hasStartFormKey === 1" size="small" type="success">是</el-tag>
-          <el-tag v-else-if="scope.row.hasStartFormKey === 0" size="small" type="danger">否</el-tag>
-        </template>
-      </el-table-column>
-      <el-table-column
         prop="suspensionState"
         header-align="center"
         align="center"
@@ -161,7 +154,8 @@
     data () {
       return {
         searchForm: {
-          name: ''
+          category: '',
+          key: ''
         },
         dataList: [],
         pageIndex: 1,
@@ -185,7 +179,8 @@
           params: {
             'page': this.pageIndex,
             'limit': this.pageSize,
-            'name': this.searchForm.name
+            'category': this.searchForm.category,
+            'key': this.searchForm.key
           }
         }).then(({data}) => {
           if (data && data.code === 0) {

@@ -1,9 +1,8 @@
 <template>
   <nav class="site-navbar" :class="'site-navbar--' + navbarLayoutType">
-    <div class="site-navbar__header">
+    <div class="site-navbar__header" v-if="!sidebarFold">
       <h1 class="site-navbar__brand" @click="$router.push({ name: 'home' })">
         <a class="site-navbar__brand-lg" href="javascript:;">微同软件管理平台</a>
-        <a class="site-navbar__brand-mini" href="javascript:;">微同</a>
       </h1>
     </div>
     <div class="site-navbar__body clearfix">

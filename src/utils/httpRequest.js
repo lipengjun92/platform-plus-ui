@@ -13,8 +13,8 @@ axios.defaults.timeout = 30000
 // 跨域请求，允许保存cookie
 axios.defaults.withCredentials = true
 axios.defaults.headers = {'Content-Type': 'application/json; charset=utf-8'}
-// 非生产环境 && 开启代理, 接口前缀统一使用[/platform-plus]前缀做代理拦截!
-const BASE_URL = process.env.NODE_ENV !== 'production' && process.env.OPEN_PROXY ? '/platform-plus' : window.SITE_CONFIG.baseUrl
+// 非生产环境 && 开启代理, 接口前缀统一使用[/platform-admin]前缀做代理拦截!
+const BASE_URL = process.env.NODE_ENV !== 'production' && process.env.OPEN_PROXY ? '/platform-admin' : window.SITE_CONFIG.baseUrl
 // 对面暴露的基础请求路径
 axios.BASE_URL = BASE_URL
 

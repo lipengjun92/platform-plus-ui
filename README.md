@@ -1,11 +1,3 @@
-#### [腾讯云2019新春采购节](https://cloud.tencent.com/redirect.php?redirect=1036&cps_key=30280f92fc381dfc9e1d9e0e23d25a18&from=console)：
-【开年好云 钜惠来袭】2019新春采购节，30款云产品感恩回馈。
-[![腾讯云2019新春采购节](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/active/tx/520_120.jpg)](https://cloud.tencent.com/redirect.php?redirect=1036&cps_key=30280f92fc381dfc9e1d9e0e23d25a18&from=console)
-
-#### [阿里云开年采购季](https://www.aliyun.com/acts/product-section-2019/new-users?userCode=i8s6n64p)：
-入门爆款云服务器，降低采购成本，开发者和小微企业首选。
-[![阿里云开年采购季](https://platform-wxmall.oss-cn-beijing.aliyuncs.com/active/ali/540x250.jpg)](https://www.aliyun.com/acts/product-section-2019/new-users?userCode=i8s6n64p)
-
 ## 介绍
 - platform-plus-ui基于vue、element-ui构建开发，实现platform-plus后台管理前端功能。
 - 封装富文本编辑器组件，并且支持使用v-model双向绑定富文本数据。简单到像使用input一样。
@@ -17,7 +9,7 @@ data () {
         msg: '<h2><img src="http://img.baidu.com/hi/face/i_f03.gif"/>Vue + UEditor + v-model双向绑定</h2>'
       }
 ```
-- 后台地址：https://github.com/lipengjun92/platform-plus
+- 后台地址：https://gitee.com/fuyang_lipengjun/platform-plus
 
 ## 实现功能
 ```
@@ -113,7 +105,7 @@ npm run dev
 ```
 修改
 /static/config/index-[prod].js文件中  
-window.SITE_CONFIG['baseUrl'] = 'http://47.93.215.16/platform-plus'// 后台接口请求地址
+window.SITE_CONFIG['baseUrl'] = 'http://ip/platform-admin'// 后台接口请求地址
 window.SITE_CONFIG['domain'] = '静态资源cdn地址';  
 
 # 构建生产环境(默认)
@@ -127,9 +119,9 @@ npm run build
         root /usr/local/nginx/dist;
         index index.html;
     }
-    location /platform-plus {
+    location /platform-admin {
         # 转发请求到后端
-        proxy_pass                         http://localhost:8888;
+        proxy_pass                         http://localhost:8801;
         proxy_set_header  Host             $host;
         proxy_set_header  X-Real-IP        $remote_addr;
         proxy_set_header  X-Forwarded-For  $proxy_add_x_forwarded_for;

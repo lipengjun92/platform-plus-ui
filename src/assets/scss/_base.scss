@@ -35,6 +35,33 @@ img {
   clear: both;
 }
 
+/* Sidebar fold
+------------------------------ */
+.site-sidebar--fold {
+  .site-navbar__body,
+  .site-content__wrapper {
+    margin-left: 0;
+  }
+  .site-navbar__brand {
+    &-lg {
+      display: none;
+    }
+    &-mini {
+      display: inline-block;
+    }
+  }
+  .site-sidebar,
+  .site-sidebar__inner {
+    overflow: initial;
+  }
+  .site-sidebar__menu-icon {
+    margin-right: 0;
+    font-size: 20px;
+  }
+  .site-content--tabs > .el-tabs > .el-tabs__header {
+    left: 0;
+  }
+}
 
 /* Animation
 ------------------------------ */
@@ -68,40 +95,6 @@ img {
   min-width: 300px;
 }
 
-/* Sidebar fold
------------------------------- */
-.site-sidebar--fold {
-  .site-navbar__header,
-  .site-navbar__brand,
-  .site-sidebar,
-  .site-sidebar__inner,
-  .el-menu.site-sidebar__menu {
-    width: 64px;
-  }
-  .site-navbar__body,
-  .site-content__wrapper {
-    margin-left: 64px;
-  }
-  .site-navbar__brand {
-    &-lg {
-      display: none;
-    }
-    &-mini {
-      display: inline-block;
-    }
-  }
-  .site-sidebar,
-  .site-sidebar__inner {
-    overflow: initial;
-  }
-  .site-sidebar__menu-icon {
-    margin-right: 0;
-    font-size: 20px;
-  }
-  .site-content--tabs > .el-tabs > .el-tabs__header {
-    left: 64px;
-  }
-}
 // animation
 .site-navbar__header,
 .site-navbar__brand,
@@ -160,14 +153,14 @@ img {
   &__header {
     position: relative;
     float: left;
-    width: 230px;
+    width: 200px;
     height: 50px;
     overflow: hidden;
   }
   &__brand {
     display: table-cell;
     vertical-align: middle;
-    width: 230px;
+    width: 200px;
     height: 50px;
     margin: 0;
     line-height: 50px;
@@ -212,7 +205,7 @@ img {
   }
   &__body {
     position: relative;
-    margin-left: 230px;
+    margin-left: 200px;
     padding-right: 15px;
     background-color: #fff;
   }
@@ -255,7 +248,7 @@ img {
   left: 0;
   bottom: 0;
   z-index: 1020;
-  width: 230px;
+  width: 200px;
   overflow: hidden;
 
   &--dark,
@@ -292,7 +285,7 @@ img {
     overflow-y: scroll;
   }
   &__menu.el-menu {
-    width: 230px;
+    width: 200px;
     border-right: 0;
   }
   &__menu-icon {
@@ -312,23 +305,23 @@ img {
 ------------------------------ */
 .site-content {
   position: relative;
-  padding: 15px;
+  padding: 5px;
 
   &__wrapper {
     position: relative;
     padding-top: 50px;
-    margin-left: 230px;
+    margin-left: 200px;
     min-height: 100%;
     background: $content--background-color;
   }
   &--tabs {
-    padding: 55px 0 0;
+    padding: 40px 0 0;
   }
   > .el-tabs {
     > .el-tabs__header {
       position: fixed;
       top: 50px;
-      left: 230px;
+      left: 200px;
       right: 0;
       z-index: 930;
       padding: 0 55px 0 15px;
@@ -342,7 +335,7 @@ img {
       }
     }
     > .el-tabs__content {
-      padding: 0 15px 15px;
+      padding: 0;
       > .site-tabs__tools {
         position: fixed;
         top: 50px;

@@ -13,11 +13,11 @@ module.exports = {
     assetsPublicPath: '/',
     // 代理列表, 是否开启代理通过[./dev.env.js]配置
     proxyTable: devEnv.OPEN_PROXY === false ? {} : {
-      '/platform-plus': {
-        target: 'http://47.93.215.16/platform-plus',
+      '/platform-admin': {
+        target: 'http://ip/platform-admin',
         changeOrigin: true,
         pathRewrite: {
-          '^/platform-plus': '/'
+          '^/platform-admin': '/'
         }
       }
     },

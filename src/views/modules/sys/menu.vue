@@ -118,7 +118,7 @@
           url: '/sys/menu/list',
           method: 'get'
         }).then(({data}) => {
-          this.dataList = this.treeDataTranslate(data.menuList, 'menuId')
+          this.dataList = this.treeDataTranslate(data.menuList, 'menuId', 'parentId', 'childrens')
         })
       },
       // 新增 / 修改

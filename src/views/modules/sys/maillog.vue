@@ -1,13 +1,14 @@
 <template>
-  <div class="mod-remodel">
+  <div class="mod-maillog">
     <el-form :inline="true" :model="searchForm" @keyup.enter.native="getDataList()">
       <el-form-item>
-        <el-input v-model="searchForm.key" placeholder="关键字" clearable></el-input>
+        <el-input v-model="searchForm.sender" placeholder="参数名" clearable></el-input>
       </el-form-item>
       <el-form-item>
         <el-button @click="getDataList()">查询</el-button>
-        <el-button v-if="isAuth('act:remodel:save')" type="primary" @click="addOrUpdateHandle()">新增</el-button>
-        <el-button v-if="isAuth('act:remodel:delete')" type="danger" @click="deleteHandle()"
+        <el-button v-if="isAuth('sys:maillog:config')" type="primary" @click="configHandle()">邮箱配置
+        </el-button>
+        <el-button v-if="isAuth('sys:maillog:delete')" type="danger" @click="deleteHandle()"
                    :disabled="dataListSelections.length <= 0">批量删除
         </el-button>
       </el-form-item>
@@ -24,52 +25,68 @@
         width="50">
       </el-table-column>
       <el-table-column
-        prop="name"
+        prop="sender"
         header-align="center"
         align="center"
-        label="模型名称">
+        label="发送人">
       </el-table-column>
       <el-table-column
-        prop="key"
+        show-overflow-tooltip
+        prop="receiver"
         header-align="center"
         align="center"
-        label="关键字">
+        label="接收人">
       </el-table-column>
       <el-table-column
-        prop="createTime"
+        prop="subject"
         header-align="center"
         align="center"
-        label="创建时间">
+        label="邮件主题">
       </el-table-column>
       <el-table-column
-        prop="lastUpdateTime"
+        show-overflow-tooltip
+        prop="content"
         header-align="center"
         align="center"
-        label="最后修改时间">
+        label="发送内容">
       </el-table-column>
       <el-table-column
-        prop="version"
+        prop="sendDate"
         header-align="center"
         align="center"
-        label="版本">
+        label="发送时间">
+      </el-table-column>
+      <el-table-column
+        prop="type"
+        header-align="center"
+        align="center"
+        label="发送类型">
+        <template slot-scope="scope">
+          <el-tag v-if="scope.row.type === 0" size="small">系统发送邮件</el-tag>
+          <el-tag v-else-if="scope.row.type === 1" size="small" type="success">用户发送邮件</el-tag>
+        </template>
+      </el-table-column>
+      <el-table-column
+        prop="sendResult"
+        header-align="center"
+        align="center"
+        label="发送结果">
+        <template slot-scope="scope">
+          <el-tag v-if="scope.row.sendResult === 1" size="small" type="danger">发送失败</el-tag>
+          <el-tag v-else-if="scope.row.sendResult === 0" size="small" type="success">发送成功</el-tag>
+        </template>
       </el-table-column>
       <el-table-column
         fixed="right"
         header-align="center"
         align="center"
-        width="200"
+        width="150"
         label="操作">
         <template slot-scope="scope">
-          <el-button v-if="isAuth('act:remodel:update')" type="text" size="small"
-                     @click="editorHandle(scope.row.id)">编辑
+          <el-button v-if="isAuth('sys:maillog:info')" type="text" size="small"
+                     @click="lookHandle(scope.row.id)">查看
           </el-button>
-          <el-button v-if="isAuth('act:remodel:deploy')" type="text" size="small" @click="deployHandle(scope.row.id)">
-            部署
-          </el-button>
-          <el-button v-if="isAuth('act:remodel:export')" type="text" size="small"
-                     @click="exportHandle(scope.row.id)">导出
-          </el-button>
-          <el-button v-if="isAuth('act:remodel:delete')" type="text" size="small" @click="deleteHandle(scope.row.id)">
+          <el-button v-if="isAuth('sys:maillog:delete')" type="text" size="small" @click="deleteHandle(scope.row.id)">
             删除
           </el-button>
         </template>
@@ -84,30 +101,34 @@
       :total="totalPage"
       layout="total, sizes, prev, pager, next, jumper">
     </el-pagination>
-    <!-- 弹窗, 新增 / 修改 -->
-    <add-or-update v-if="addOrUpdateVisible" ref="addOrUpdate" @refreshDataList="getDataList"></add-or-update>
+    <!-- 弹窗, 查看 -->
+    <detail v-if="detailVisible" ref="look" @refreshDataList="getDataList"></detail>
+    <!-- 邮箱配置 -->
+    <config v-if="configVisible" ref="config"></config>
   </div>
 </template>
 
 <script>
-  import AddOrUpdate from './remodel-add-or-update'
+  import Detail from './maillog-detail'
+  import Config from './maillog-config'
 
   export default {
     data () {
       return {
         searchForm: {
-          key: ''
+          sender: ''
         },
         dataList: [],
         pageIndex: 1,
         pageSize: 10,
         totalPage: 0,
         dataListSelections: [],
-        addOrUpdateVisible: false
+        detailVisible: false,
+        configVisible: false
       }
     },
     components: {
-      AddOrUpdate
+      Detail, Config
     },
     activated () {
       this.getDataList()
@@ -116,12 +137,12 @@
       // 获取数据列表
       getDataList () {
         this.$http({
-          url: '/act/remodel/list',
+          url: '/sys/maillog/list',
           method: 'get',
           params: {
             'page': this.pageIndex,
             'limit': this.pageSize,
-            'key': this.searchForm.key
+            'sender': this.searchForm.sender
           }
         }).then(({data}) => {
           if (data && data.code === 0) {
@@ -149,10 +170,16 @@
         this.dataListSelections = val
       },
       // 新增 / 修改
-      addOrUpdateHandle (id) {
-        this.addOrUpdateVisible = true
+      lookHandle (id) {
+        this.detailVisible = true
         this.$nextTick(() => {
-          this.$refs.addOrUpdate.init(id)
+          this.$refs.look.init(id)
+        })
+      },
+      configHandle () {
+        this.configVisible = true
+        this.$nextTick(() => {
+          this.$refs.config.init()
         })
       },
       // 删除
@@ -166,7 +193,7 @@
           type: 'warning'
         }).then(() => {
           this.$http({
-            url: '/act/remodel/delete',
+            url: '/sys/maillog/delete',
             method: 'post',
             data: ids
           }).then(({data}) => {
@@ -181,32 +208,6 @@
           })
         }).catch(() => {
         })
-      },
-      // 部署
-      deployHandle (id) {
-        this.$http({
-          url: '/act/remodel/deploy?id=' + id,
-          method: 'post'
-        }).then(({data}) => {
-          if (data && data.code === 0) {
-            this.$message({
-              message: data.msg,
-              type: 'success',
-              duration: 2000
-            })
-            this.getDataList()
-          }
-        })
-      },
-      // 导出xml
-      exportHandle (id) {
-        let url = this.$http.BASE_URL + `/act/remodel/export?id=${id}&token=${this.$cookie.get('token')}`
-        window.open(url)
-      },
-      // 编辑
-      editorHandle (id) {
-        let url = this.$http.BASE_URL + `/modeler.html?modelId=${id}&token=${this.$cookie.get('token')}`
-        window.open(url)
       }
     }
   }

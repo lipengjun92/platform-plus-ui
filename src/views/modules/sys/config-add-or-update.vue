@@ -1,23 +1,23 @@
 <template>
   <el-dialog
-    :title="!dataForm.id ? '新增' : '修改'"
+    :title="!dataForm.id ? '新增' : !disabled ? '修改' : '查看'"
     :close-on-click-modal="false"
     :visible.sync="visible">
     <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()"
              label-width="80px">
       <el-form-item label="参数名" prop="paramKey">
-        <el-input v-model="dataForm.paramKey" placeholder="参数名"></el-input>
+        <el-input v-model="dataForm.paramKey" :disabled="disabled" placeholder="参数名"></el-input>
       </el-form-item>
       <el-form-item label="参数值" prop="paramValue">
-        <el-input v-model="dataForm.paramValue" placeholder="参数值"></el-input>
+        <el-input v-model="dataForm.paramValue" :disabled="disabled" placeholder="参数值"></el-input>
       </el-form-item>
       <el-form-item label="备注" prop="remark">
-        <el-input v-model="dataForm.remark" placeholder="备注"></el-input>
+        <el-input v-model="dataForm.remark" :disabled="disabled" placeholder="备注"></el-input>
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
       <el-button @click="visible = false">取消</el-button>
-      <el-button type="primary" @click="dataFormSubmit()">确定</el-button>
+      <el-button v-if="!disabled" type="primary" @click="dataFormSubmit()">确定</el-button>
     </span>
   </el-dialog>
 </template>
@@ -26,6 +26,7 @@
   export default {
     data () {
       return {
+        disabled: false,
         visible: false,
         dataForm: {
           id: 0,
@@ -44,7 +45,8 @@
       }
     },
     methods: {
-      init (id) {
+      init (id, disabled) {
+        this.disabled = disabled
         this.dataForm.id = id || 0
         this.visible = true
         this.$nextTick(() => {

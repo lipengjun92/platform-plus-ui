@@ -1,5 +1,5 @@
 <template>
-  <aside class="site-sidebar" :class="'site-sidebar--' + sidebarLayoutSkin">
+  <aside class="site-sidebar" :class="'site-sidebar--' + sidebarLayoutSkin" v-if="!sidebarFold">
     <div class="site-sidebar__inner">
       <el-menu unique-opened
                :default-active="menuActiveName || 'home'"
